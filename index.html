@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIT Discussion (2)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            user-select: none; /* يمنع تحديد النص */
+            -webkit-user-select: none; /* لمتصفحات WebKit مثل Chrome وSafari */
+            -moz-user-select: none; /* لمتصفح Firefox */
+            -ms-user-select: none; /* لمتصفح Internet Explorer/Edge */
+        }
+        @media print { /* إخفاء الصفحة عند الطباعة */
+            body { 
+                display: none;
+            }
+        }
+
+        .quiz-container {
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #007BFF;
+        }
+        .timer {
+            color: red;
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question p {
+            font-weight: bold;
+        }
+        .options label {
+            display: block;
+            margin: 5px 0;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            display: none;
+        }
+        .incorrect {
+            color: red;
+        }
+        .correct {
+            color: green;
+        }
+        .question-result {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        img {
+            pointer-events: none; /* يمنع سحب الصور */
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>GIT Discussion (2)</h1>
+        <div class="timer" id="timer">Time remaining: 60 seconds</div>
+
+        <div class="question" id="question-1">
+            <p>1-  Which one of the following is least likely to cause malabsorption?</p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="Systemic sclerosis">Systemic sclerosis</label>
+                <label><input type="radio" name="q1" value="Cystic fibrosis">Cystic fibrosis</label>
+                <label><input type="radio" name="q1" value="Primary biliary cirrhosis">Primary biliary cirrhosis</label>
+                <label><input type="radio" name="q1" value="Whipple's disease">Whipple's disease</label>
+                <label><input type="radio" name="q1" value="Haemochromatosis">Haemochromatosis</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-2">
+            <p>2-  All of the following cause malabsorption with steatorrhoea except ..</p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="Celiac disease">Celiac disease</label>
+                <label><input type="radio" name="q2" value="Wipple disease">Wipple disease</label>
+                <label><input type="radio" name="q2" value="Bacterial overgrowth">Bacterial overgrowth</label>
+                <label><input type="radio" name="q2" value="Pernicious anaemia">Pernicious anaemia</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-3">
+            <p>3-  Most reliable method of measuring steatorrhea is ..</p>
+            <div class="options">
+                <label><input type="radio" name="q3" value="Schilling test">Schilling test</label>
+                <label><input type="radio" name="q3" value="D-Xylose absorption test">D-Xylose absorption test</label>
+                <label><input type="radio" name="q3" value="Faecal fat estimation">Faecal fat estimation</label>
+                <label><input type="radio" name="q3" value="Enteroscopy">Enteroscopy</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-4">
+            <p>4-  A 49-year-old woman is being investigated for chronic diarrhoea and weight loss. Malabsorption is suspected. Which of the following investigations is most likely to make a definitive diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q4" value="presence of faecal osmotic gap">presence of faecal osmotic gap</label>
+                <label><input type="radio" name="q4" value="D-xylose test">D-xylose test</label>
+                <label><input type="radio" name="q4" value="stool fat measurements">stool fat measurements</label>
+                <label><input type="radio" name="q4" value="Schilling test">Schilling test</label>
+                <label><input type="radio" name="q4" value="mucosal biopsy">mucosal biopsy</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-5">
+            <p>5-  A 46 year old woman with scleroderma presents with frequent watery diarrhoea, bloating and weight loss. Colonoscopy is normal with no abnormality found on biopsy histology. Coeliac serology is negative, thyroid function normal and stool culture negative. Bacterial overgrowth is suspected. What would you expect to see on blood analysis to support this diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q5" value="Increase in immunoglobulins">Increase in immunoglobulins</label>
+                <label><input type="radio" name="q5" value="Increased ferritin and normal haemoglobin">Increased ferritin and normal haemoglobin</label>
+                <label><input type="radio" name="q5" value="Low vitamin B12 and increased mean cell volume">Low vitamin B12 and increased mean cell volume</label>
+                <label><input type="radio" name="q5" value="Positive cytomegalovirus /serology">Positive cytomegalovirus /serology</label>
+                <label><input type="radio" name="q5" value="Reduced gastrin">Reduced gastrin</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-6">
+            <p>6-  A 54-year-old female with a history of scleroderma presents with chronic diarrhoea and bloating. Blood tests show a mild macrocytic anaemia. A diagnosis of small bowel bacterial overgrowth is suspected. Which one of the following tests is most likely to confirm the diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q6" value="Jejunal biopsy">Jejunal biopsy</label>
+                <label><input type="radio" name="q6" value="Small bowel aspiration and culture">Small bowel aspiration and culture</label>
+                <label><input type="radio" name="q6" value="14C-xylose breath test">14C-xylose breath test</label>
+                <label><input type="radio" name="q6" value="Small bowel meal">Small bowel meal</label>
+                <label><input type="radio" name="q6" value="14C-glycocholate breath test">14C-glycocholate breath test</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-7">
+            <p>7-  A 64-year-old woman complains of having 'excessive wind. She is normally fit and well but for the past three months she has felt bloated and has been passing wind frequently. She also complains of vague upper abdominal pain and chronic diarrhoea A hydrogen breath test confirms a diagnosis of small bowel bacterial overgrowth syndrome. What is the treatment of choice?</p>
+            <div class="options">
+                <label><input type="radio" name="q7" value="Tetracycline">Tetracycline</label>
+                <label><input type="radio" name="q7" value="Rifuxamin">Rifuxamin</label>
+                <label><input type="radio" name="q7" value="Cefaclor">Cefaclor</label>
+                <label><input type="radio" name="q7" value="Nitrofuratoin">Nitrofuratoin</label>
+                <label><input type="radio" name="q7" value="Ciprofloxacin">Ciprofloxacin</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-8">
+            <p>8-  Treatment of choice in correcting anaemia of 'blind loop syndrome' is ..</p>
+            <div class="options">
+                <label><input type="radio" name="q8" value="Iron">Iron</label>
+                <label><input type="radio" name="q8" value="Broad-spectrum antibiotics">Broad-spectrum antibiotics</label>
+                <label><input type="radio" name="q8" value="Vitamin B12">Vitamin B12</label>
+                <label><input type="radio" name="q8" value="Folic acid">Folic acid</label>
+                <label><input type="radio" name="q8" value="Probiotic">Probiotic</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-9">
+            <p>9-  A 46-year-old man is being investigated for indigestion, diarrhoea and lymphadenopathy. Jejunal biopsy shows deposition of macrophages containing PAS-positive granules. What is the most likely diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q9" value="Bacterial overgrowth">Bacterial overgrowth</label>
+                <label><input type="radio" name="q9" value="Coeliac disease">Coeliac disease</label>
+                <label><input type="radio" name="q9" value="Tropical sprue">Tropical sprue</label>
+                <label><input type="radio" name="q9" value="Whipple's disease">Whipple's disease</label>
+                <label><input type="radio" name="q9" value="Small bowel lymphoma">Small bowel lymphoma</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-10">
+            <p>10-  A 50 year old man presents with diarrhoea, low-grade fever and joint pains. A colonoscopy is normal. Biopsies from the terminal ileum reveal the presence of foamy macrophages. What is the appropriate management?</p>
+            <div class="options">
+                <label><input type="radio" name="q10" value="Two weeks of intravenous ceftriaxone, then oral antibiotics for 1 year">Two weeks of intravenous ceftriaxone, then oral antibiotics for 1 year</label>
+                <label><input type="radio" name="q10" value="Seven days of oral metronidazole">Seven days of oral metronidazole</label>
+                <label><input type="radio" name="q10" value="Intravenous immunoglobulin">Intravenous immunoglobulin</label>
+                <label><input type="radio" name="q10" value="No treatment is required - symptoms usually settle spontaneously">No treatment is required - symptoms usually settle spontaneously</label>
+                <label><input type="radio" name="q10" value="Oral omeprazole and restriction of dietary gluten">Oral omeprazole and restriction of dietary gluten</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-11">
+            <p>11- A four-year-old girl presents to her GP, with her mother, with a 2-day history of fevers and diarrhoea. Her mother has contacted her nursery, who have informed her that several of the other children have been off sick with the same problem. What is the most likely causative organism?</p>
+            <div class="options">
+                <label><input type="radio" name="q11" value="Rotavirus"> Rotavirus</label>
+                <label><input type="radio" name="q11" value="Salmonella"> Salmonella</label>
+                <label><input type="radio" name="q11" value="Enterotoxigenic Escherichia coli"> Enterotoxigenic Escherichia coli</label>
+                <label><input type="radio" name="q11" value="Influenza"> Influenza</label>
+                <label><input type="radio" name="q11" value="Varicella zoster virus"> Varicella zoster virus</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-12">
+            <p>12-A 29-year-old man presents with a nine day history of watery diarrhoea that developed one week after returning from India. On examination he is apyrexial and his abdomen is soft and non-tender. What is the most likely causative organism?</p>
+            <div class="options">
+                <label><input type="radio" name="q12" value="Amoebiasis"> Amoebiasis</label>
+                <label><input type="radio" name="q12" value="Giardiasis"> Giardiasis</label>
+                <label><input type="radio" name="q12" value="Campylobacter"> Campylobacter</label>
+                <label><input type="radio" name="q12" value="Shigella"> Shigella</label>
+                <label><input type="radio" name="q12" value="Salmonella"> Salmonella</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-13">
+            <p>13- which of the following is recommended Treatment for giardiasis ??</p>
+            <div class="options">
+                <label><input type="radio" name="q13" value="Albendazole"> Albendazole</label>
+                <label><input type="radio" name="q13" value="Clindamycin"> Clindamycin</label>
+                <label><input type="radio" name="q13" value="Tinidazole"> Tinidazole</label>
+                <label><input type="radio" name="q13" value="Giardiasis is self limited disease and requires no antibiotic therapy"> Giardiasis is self limited disease and requires no antibiotic therapy</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-14">
+            <p>14- Which of the following is true of giardia lamblia infection ?</p>
+            <div class="options">
+                <label><input type="radio" name="q14" value="Cause steatorrhoea"> Cause steatorrhoea</label>
+                <label><input type="radio" name="q14" value="Diagnosed by stool culture"> Diagnosed by stool culture</label>
+                <label><input type="radio" name="q14" value="Eradicated by mebendazole"> Eradicated by mebendazole</label>
+                <label><input type="radio" name="q14" value="Is often symptomatic"> Is often symptomatic</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-15">
+            <p>15-A 23-year-old man develops watery diarrhoea 5 days after arriving in Mexico. Which one of the following is the most likely responsible organism?</p>
+            <div class="options">
+                <label><input type="radio" name="q15" value="Salmonella"> Salmonella</label>
+                <label><input type="radio" name="q15" value="Shigella"> Shigella</label>
+                <label><input type="radio" name="q15" value="Campylobacter"> Campylobacter</label>
+                <label><input type="radio" name="q15" value="Escherichia coli"> Escherichia coli</label>
+                <label><input type="radio" name="q15" value="Bacillus cereus"> Bacillus cereus</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-16">
+            <p>16-Which one of the following is the most likely presentation of Staphylococcus aureus food poisoning?</p>
+            <div class="options">
+                <label><input type="radio" name="q16" value="Tenesmus"> Tenesmus</label>
+                <label><input type="radio" name="q16" value="Watery diarrhoea"> Watery diarrhoea</label>
+                <label><input type="radio" name="q16" value="Dysentery"> Dysentery</label>
+                <label><input type="radio" name="q16" value="Severe vomiting"> Severe vomiting</label>
+                <label><input type="radio" name="q16" value="Presentation 24-48 hours after eating affected food"> Presentation 24-48 hours after eating affected food</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-17">
+            <p>17-All of the following are causes of bloody diarrhea except ...</p>
+            <div class="options">
+                <label><input type="radio" name="q17" value="Campylobacter"> Campylobacter</label>
+                <label><input type="radio" name="q17" value="Salmonella"> Salmonella</label>
+                <label><input type="radio" name="q17" value="Shigella"> Shigella</label>
+                <label><input type="radio" name="q17" value="E. Coli"> E. Coli</label>
+                <label><input type="radio" name="q17" value="Staph"> Staph</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-18">
+            <p>18-Which cause bloody diarrhoea in HIV patients?</p>
+            <div class="options">
+                <label><input type="radio" name="q18" value="Cytomegalovirus colitis"> Cytomegalovirus colitis</label>
+                <label><input type="radio" name="q18" value="Cryptosporidium"> Cryptosporidium</label>
+                <label><input type="radio" name="q18" value="Cystosprodium"> Cystosprodium</label>
+                <label><input type="radio" name="q18" value="microspora"> microspora</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-19">
+            <p>19- 78 years old woman with hip osteoarthritis presents with altered bowel habits. She undergoes sigmoidoscopy and rectal biopsy shows normal epithelium and pigment laden macrophages in lamina propria. What is the most likely cause of these findings ?</p>
+            <div class="options">
+                <label><input type="radio" name="q19" value="Laxative abuse"> Laxative abuse</label>
+                <label><input type="radio" name="q19" value="Diverticular disease"> Diverticular disease</label>
+                <label><input type="radio" name="q19" value="Ulcerative colitis"> Ulcerative colitis</label>
+                <label><input type="radio" name="q19" value="Mesentric ischemia"> Mesentric ischemia</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-20">
+            <p>20-Melanosis coli indicates ..</p>
+            <div class="options">
+                <label><input type="radio" name="q20" value="Anthraquinone laxative abuse"> Anthraquinone laxative abuse</label>
+                <label><input type="radio" name="q20" value="Hypereosinophilic enteritis"> Hypereosinophilic enteritis</label>
+                <label><input type="radio" name="q20" value="Crohn's disease"> Crohn's disease</label>
+                <label><input type="radio" name="q20" value="Melanoma affecting colon"> Melanoma affecting colon</label>
+                <label><input type="radio" name="q20" value="Excess melatonin secretion"> Excess melatonin secretion</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-21">
+            <p>When should we continue anticoagulation indefinitely in sagittal sinus thrombosis ??</p>
+            <div class="options">
+                <label><input type="radio" name="q21" value="Thrombophilia"> Thrombophilia</label>
+                <label><input type="radio" name="q21" value="Hypercoagulable state"> Hypercoagulable state</label>
+                <label><input type="radio" name="q21" value="Previous history of coma"> Previous history of coma</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-22">
+            <p>About anticoagulation, when should we reduce the dose definitely ??</p>
+            <div class="options">
+                <label><input type="radio" name="q22" value="Thrombophilia"> Thrombophilia</label>
+                <label><input type="radio" name="q22" value="Hypercoagulable state"> Hypercoagulable state</label>
+                <label><input type="radio" name="q22" value="Previous history of coma"> Previous history of coma</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-23">
+            <p>A 43-year-old man feels vaguely unwell. Physical examination is unremarkable except for evidence of scleral icterus. The skin appears normal. Which of the following is the most likely explanation for why early jaundice is visible in the eyes but not the skin?</p>
+            <div class="options">
+                <label><input type="radio" name="q23" value="the high type II collagen content of scleral tissue"> the high type II collagen content of scleral tissue</label>
+                <label><input type="radio" name="q23" value="the high elastin content of scleral tissue"> the high elastin content of scleral tissue</label>
+                <label><input type="radio" name="q23" value="the high blood flow to the head with consequent increased bilirubin delivery"> the high blood flow to the head with consequent increased bilirubin delivery</label>
+                <label><input type="radio" name="q23" value="secretion via the lacrimal glands"> secretion via the lacrimal glands</label>
+                <label><input type="radio" name="q23" value="the lighter colour of the sclera"> the lighter colour of the sclera</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-24">
+            <p>29 years old woman with jaundice. total bilirubin 3, direct bilirubin 1.3 What is your diagnosis</p>
+            <div class="options">
+                <label><input type="radio" name="q24" value="Dubin johnson syndrome"> Dubin johnson syndrome</label>
+                <label><input type="radio" name="q24" value="Gilbert syndrome"> Gilbert syndrome</label>
+                <label><input type="radio" name="q24" value="Crigler najjar syndrome"> Crigler najjar syndrome</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-25">
+            <p>A 22-year-old male blood donor is noted to have the following blood results .. Bilirubin 41 pmol/L ALP 84 U/L ALT 23 U/L Albumin 41 g/L Dipstick urinalysis .. No bilirubinuria He has recently complained of coryzal symptoms and a non-productive cough. What is the most likely diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q25" value="Gilbert's syndrome"> Gilbert's syndrome</label>
+                <label><input type="radio" name="q25" value="Dubin-Johnson syndrome"> Dubin-Johnson syndrome</label>
+                <label><input type="radio" name="q25" value="Rotor syndrome"> Rotor syndrome</label>
+                <label><input type="radio" name="q25" value="Hepatitis C infection"> Hepatitis C infection</label>
+                <label><input type="radio" name="q25" value="Infectious mononucleosis"> Infectious mononucleosis</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-26">
+            <p>Palpation of lower border liver is done by all of the following except ..</p>
+            <div class="options">
+                <label><input type="radio" name="q26" value="Scratch method"> Scratch method</label>
+                <label><input type="radio" name="q26" value="Light percussion"> Light percussion</label>
+                <label><input type="radio" name="q26" value="Radial border of hand"> Radial border of hand</label>
+                <label><input type="radio" name="q26" value="Ulnar border of hand"> Ulnar border of hand</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-27">
+            <p>Lower liver border examination is done by the following except ...</p>
+            <div class="options">
+                <label><input type="radio" name="q27" value="Scratch method"> Scratch method</label>
+                <label><input type="radio" name="q27" value="Deep percussion"> Deep percussion</label>
+                <label><input type="radio" name="q27" value="Light percussion"> Light percussion</label>
+                <label><input type="radio" name="q27" value="Radial border of hand"> Radial border of hand</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-28">
+            <p>Which of the following is Cause of cholestasis ?</p>
+            <div class="options">
+                <label><input type="radio" name="q28" value="Primary biliary cirrhosis"> Primary biliary cirrhosis</label>
+                <label><input type="radio" name="q28" value="Primary sclerosing cholangitis"> Primary sclerosing cholangitis</label>
+                <label><input type="radio" name="q28" value="Autoimmune hepatitis"> Autoimmune hepatitis</label>
+                <label><input type="radio" name="q28" value="Cystic fibrosis"> Cystic fibrosis</label>
+                <label><input type="radio" name="q28" value="All of the above"> All of the above</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-29">
+            <p>One of the following drugs cause cholestasis ??</p>
+            <div class="options">
+                <label><input type="radio" name="q29" value="Acetaminophen"> Acetaminophen</label>
+                <label><input type="radio" name="q29" value="Erythromycin"> Erythromycin</label>
+                <label><input type="radio" name="q29" value="Carbamazepine"> Carbamazepine</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-30">
+            <p>A 54-year-old woman presents with jaundice shortly after being discharged from hospital Liver function tests are reported as follows:- Albumin 49 g/l Bilirubin 89 umol/l Alanine transferase (ALT) 66 iu/l Alkaline phosphatase (ALP) 245 |jmol/l Gamma glutamyl transferase (yGT) 529 Which of the following antibiotics is she most likely to have received?</p>
+            <div class="options">
+                <label><input type="radio" name="q30" value="Flucloxacillin"> Flucloxacillin</label>
+                <label><input type="radio" name="q30" value="Gentamicin"> Gentamicin</label>
+                <label><input type="radio" name="q30" value="Ciprofloxacin"> Ciprofloxacin</label>
+                <label><input type="radio" name="q30" value="Trimethoprim"> Trimethoprim</label>
+                <label><input type="radio" name="q30" value="Ceftazidime"> Ceftazidime</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-31">
+            <p>You see a 47-year-old woman who presents with a 3-day history of jaundice. You assess her liver function tests (LFTs) and see that the ALP is raised at 350 iu/L, AST 45 iu/L, ALT 50 iu/L and bilirubin 50 iu/L. The patient feels well in herself, although she has noticed that her urine has become quite dark and her stools quite pale. You assess her medication history. Which of the following drugs from the patient’s medication history may be responsible for the cholestasis?</p>
+            <div class="options">
+                <label><input type="radio" name="q31" value="Co-amoxiclav"> Co-amoxiclav</label>
+                <label><input type="radio" name="q31" value="Bendroflumethiazide"> Bendroflumethiazide</label>
+                <label><input type="radio" name="q31" value="Ramipril"> Ramipril</label>
+                <label><input type="radio" name="q31" value="Amlodipine"> Amlodipine</label>
+                <label><input type="radio" name="q31" value="Aspirin"> Aspirin</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-32">
+            <p>A 46-year-old woman presents to your clinic with a week’s history of jaundice. Her past medical history includes longstanding atrial fibrillation and hypertension. Physical examination reveals hepatomegaly. You assess her liver function which shows a bilirubin of 41 iu/L, AST 111 iu/L, ALT 155 iu/L and ALP 98 iu/L. There is no history of travel. You have a look at the patient’s medication history. Which of the following drugs below is likely to have caused the derangement in the patient’s liver function?</p>
+            <div class="options">
+                <label><input type="radio" name="q32" value="Aspirin"> Aspirin</label>
+                <label><input type="radio" name="q32" value="Ramipril"> Ramipril</label>
+                <label><input type="radio" name="q32" value="Amiodarone"> Amiodarone</label>
+                <label><input type="radio" name="q32" value="Bendroflumethiazide"> Bendroflumethiazide</label>
+                <label><input type="radio" name="q32" value="Amlodipine"> Amlodipine</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-33">
+            <p>A 25-year-old woman develops deranged liver function tests following the introduction of a new drug. Alb 40. Bilirubin 46 . ALT 576, ALP 95, yGT 150. Which of the following drugs is the most likely cause?</p>
+            <div class="options">
+                <label><input type="radio" name="q33" value="Oral contraceptive pill"> Oral contraceptive pill</label>
+                <label><input type="radio" name="q33" value="Sodium valprorate"> Sodium valprorate</label>
+                <label><input type="radio" name="q33" value="Flucloxacillin"> Flucloxacillin</label>
+                <label><input type="radio" name="q33" value="Chlorpromazine"> Chlorpromazine</label>
+                <label><input type="radio" name="q33" value="Tetracycline"> Tetracycline</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-34">
+            <p>Obese patient with BMI 32 take statin .. Last labs reveal .. AST 90 ALT 70 What should you do ??</p>
+            <div class="options">
+                <label><input type="radio" name="q34" value="Stop drug"> Stop drug</label>
+                <label><input type="radio" name="q34" value="Continue drug"> Continue drug</label>
+                <label><input type="radio" name="q34" value="Switch to another drug"> Switch to another drug</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-35">
+            <p>35- Which one of the following is dysphagia of esophygeal origin ??</p>
+            <div class="options">
+                <label><input type="radio" name="q35" value="difficulty-chewing-foods"> Difficulty chewing foods</label>
+                <label><input type="radio" name="q35" value="feeling-dysphagia-retrostenal-area-post-oral-intake"> feeling dysphagia at retrostenal area post oral intake</label>
+                <label><input type="radio" name="q35" value="tongue-weakness-after-stroke"> Tongue weakness after stroke</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-36">
+            <p>36- A 60 year old man presents with a history of dysphagia. Which of the following features would suggest that the problem originates in the oesophagus?</p>
+            <div class="options">
+                <label><input type="radio" name="q36" value="sticking-sensation-retrosternally"> A sticking sensation retrosternally in response to oral intake</label>
+                <label><input type="radio" name="q36" value="altered-voice"> Altered voice</label>
+                <label><input type="radio" name="q36" value="drooling"> Drooling</label>
+                <label><input type="radio" name="q36" value="nasal-regurgitation"> Nasal regurgitation</label>
+                <label><input type="radio" name="q36" value="symptoms-worse-with-liquids"> Symptoms worse with liquids</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-37">
+            <p>37-A 64-year-old female with a history of COPD and hypertension presents with pain on swallowing. Current medication includes a salbutamol and becotide inhaler, bendrofluazide and amlodipine. What is the most likely cause of the presentation?</p>
+            <div class="options">
+                <label><input type="radio" name="q37" value="myasthenia-gravis-precipitated-by-bendrofluazide"> Myasthenia gravis precipitated by bendrofluazide</label>
+                <label><input type="radio" name="q37" value="oesophageal-web"> Oesophageal web</label>
+                <label><input type="radio" name="q37" value="achalasia-secondary-to-amlodipine"> Achalasia secondary to amlodipine</label>
+                <label><input type="radio" name="q37" value="oesophageal-candidiasis"> Oesophageal candidiasis</label>
+                <label><input type="radio" name="q37" value="oesophageal-cancer"> Oesophageal cancer</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-38">
+            <p>38- A 27-year-old man with HIV complains of pain every time he swallows (odynophagia). He is not on any antiretroviral therapy and otherwise feels well. Examination of the mouth and pharynx are normal. Which of the following is the most likely diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q38" value="midesophageal-cancer"> midesophageal cancer</label>
+                <label><input type="radio" name="q38" value="distal-esophageal-cancer"> distal esophageal cancer</label>
+                <label><input type="radio" name="q38" value="peptic-stricture"> peptic stricture</label>
+                <label><input type="radio" name="q38" value="candida-infection"> candida infection</label>
+                <label><input type="radio" name="q38" value="bacterial-esophagitis"> bacterial esophagitis</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-39">
+            <p>39- All the following are detected by esophygeal motility study except ??</p>
+            <div class="options">
+                <label><input type="radio" name="q39" value="achalasia"> Achalasia</label>
+                <label><input type="radio" name="q39" value="diffuse-esophygeal-spasm"> Diffuse esophygeal spasm</label>
+                <label><input type="radio" name="q39" value="mechanical-obstructive-dysphagia"> Mechanical (obstructive) dysphagia</label>
+                <label><input type="radio" name="q39" value="scleroderma"> Scleroderma</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-40">
+            <p>40- Manometric study of lower esophagus is important in all EXCEPT ..</p>
+            <div class="options">
+                <label><input type="radio" name="q40" value="mallory-weiss-syndrome"> Mallory-Weiss syndrome</label>
+                <label><input type="radio" name="q40" value="polymyositis"> Polymyositis</label>
+                <label><input type="radio" name="q40" value="diffuse-esophageal-spasm"> Diffuse esophageal spasm</label>
+                <label><input type="radio" name="q40" value="achalasia-cardia"> Achalasia cardia</label>
+                <label><input type="radio" name="q40" value="crohns-disease"> Crohn's disease</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-41">
+            <p>41-A 54-year-old female presents with a 3 month history of dysphagia affecting both food and liquids from the start along with occasional symptoms of heartburn. What is the most likely underlying diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q41" value="pharyngeal-pouch"> Pharyngeal pouch</label>
+                <label><input type="radio" name="q41" value="gastric-adenocarcinoma"> Gastric adenocarcinoma</label>
+                <label><input type="radio" name="q41" value="benign-stricture"> Benign stricture</label>
+                <label><input type="radio" name="q41" value="oesophageal-cancer"> Oesophageal cancer</label>
+                <label><input type="radio" name="q41" value="achalasia"> Achalasia</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-42">
+            <p>42-A 47-year-old woman presents to your clinic with a three-month history of dysphagia. There is no history of drastic weight loss and the patient experiences symptoms when swallowing solids but not liquids. Which of the following is not an obstructive cause of dysphagia?</p>
+            <div class="options">
+                <label><input type="radio" name="q42" value="pharyngeal-carcinoma"> Pharyngeal carcinoma</label>
+                <label><input type="radio" name="q42" value="oesophageal-web"> Oesophageal web</label>
+                <label><input type="radio" name="q42" value="retrosternal-goitre"> Retrosternal goitre</label>
+                <label><input type="radio" name="q42" value="peptic-stricture"> Peptic stricture</label>
+                <label><input type="radio" name="q42" value="achalasia"> Achalasia</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-43">
+            <p>43- A 52-year-old man has episodes of severe chest pain associated with dysphagia to both solids and fluids. He has been seen twice in the emergency room, and both times the symptoms responded to sublingual nitroglycerin. He then had a full cardiac evaluation including electrocardiogram (ECG), cardiac biomarkers, and an exercise stress test, which were all normal. Which of the following is the most likely diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q43" value="herpetic-infection"> herpetic infection</label>
+                <label><input type="radio" name="q43" value="motor-disorder"> a motor disorder</label>
+                <label><input type="radio" name="q43" value="midesophageal-cancer"> midesophageal cancer</label>
+                <label><input type="radio" name="q43" value="peptic-stricture"> peptic stricture</label>
+                <label><input type="radio" name="q43" value="external-esophageal-compression"> external esophageal compression</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-44">
+            <p>44- Achalasia cardia gives rise to all EXCEPT ..</p>
+            <div class="options">
+                <label><input type="radio" name="q44" value="chest-pain"> Chest pain</label>
+                <label><input type="radio" name="q44" value="heartburn"> Heartburn</label>
+                <label><input type="radio" name="q44" value="dysphagia"> Dysphagia</label>
+                <label><input type="radio" name="q44" value="regurgitation"> Regurgitation</label>
+                <label><input type="radio" name="q44" value="diarrhoea"> Diarrhoea</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-45">
+            <p>45- Which of the following statements about achalasia is correct?</p>
+            <div class="options">
+                <label><input type="radio" name="q45" value="barretts-common-finding-on-endoscopy"> Barrett's oesophagus is a common finding on endoscopy</label>
+                <label><input type="radio" name="q45" value="chest-pain-heartburn-usual-presenting-symptoms"> Chest pain and heartburn are the usual presenting symptoms</label>
+                <label><input type="radio" name="q45" value="infestation-with-trypanosoma-cruzi"> In Europe and North America, most cases are caused by infestation with Trypanosoma cruzi</label>
+                <label><input type="radio" name="q45" value="manometry-failure-of-relaxation"> Manometry demonstrates failure of relaxation of the lower esophageal sphincter on swallowing and absent or weak simultaneous contractions in the esophageal body after swallowing</label>
+                <label><input type="radio" name="q45" value="poem-treatment-of-choice"> Perioral endoscopic myotomy (POEM) is the treatment of choice</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-46">
+            <p>46- All are true about barrett's oesophagus except ??</p>
+            <div class="options">
+                <label><input type="radio" name="q46" value="risk-of-adenocarcinoma"> Risk of adenocarcinoma</label>
+                <label><input type="radio" name="q46" value="occur-in-patient-with-sever-gerd"> Occur in patient with sever GERD</label>
+                <label><input type="radio" name="q46" value="metaplasia-from-columnar-to-squamous"> metaplasia from columnar to squamous</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-47">
+            <p>47-  The increased risk of oesophageal malignancy in patients with Barrett's oesophagus is approximately:</p>
+            <div class="options">
+                <label><input type="radio" name="q47" value="No increased risk"> No increased risk</label>
+                <label><input type="radio" name="q47" value="Twice risk"> Twice risk</label>
+                <label><input type="radio" name="q47" value="5 times risk"> 5 times risk</label>
+                <label><input type="radio" name="q47" value="50 - 100 times risk"> 50 - 100 times risk</label>
+                <label><input type="radio" name="q47" value="500 - 1,000 times risk"> 500 - 1,000 times risk</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-48">
+            <p>48-  A 54-year-old man with a long history of heartburn has an endoscopy to investigate his symptoms. A biopsy is taken from an abnormal area of mucosa in the lower oesophagus and reported as follows: Non-dysplastic columnar-lined oesophagus. What is the most suitable management?</p>
+            <div class="options">
+                <label><input type="radio" name="q48" value="Reassure and discharge"> Reassure and discharge</label>
+                <label><input type="radio" name="q48" value="Fundoplication"> Fundoplication</label>
+                <label><input type="radio" name="q48" value="Laser ablation"> Laser ablation</label>
+                <label><input type="radio" name="q48" value="ivor-Lewis oesophagectomy"> ivor-Lewis oesophagectomy</label>
+                <label><input type="radio" name="q48" value="High-dose proton pump inhibitor and follow-up"> High-dose proton pump inhibitor and follow-up</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-49">
+            <p>49-  Which one of the following investigations is considered the gold standard for the diagnosis of gastro-oesophageal reflux disease?</p>
+            <div class="options">
+                <label><input type="radio" name="q49" value="Endoscopy"> Endoscopy</label>
+                <label><input type="radio" name="q49" value="24hr oesophageal pH monitoring"> 24hr oesophageal pH monitoring</label>
+                <label><input type="radio" name="q49" value="Oesophageal manometry"> Oesophageal manometry</label>
+                <label><input type="radio" name="q49" value="Barium swallow"> Barium swallow</label>
+                <label><input type="radio" name="q49" value="CT thorax"> CT thorax</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-50">
+            <p>50-  A 71-year-old man presents with two year history of intermittent problems with swallowing. His wife has also noticed he has halitosis and is coughing at night. He has a past medical history of type 2 diabetes mellitus but states he is otherwise well. Of note his weight is stable and he has a good appetite. Clinical examination is unremarkable. What is the most likely diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q50" value="Oesophageal cancer"> Oesophageal cancer</label>
+                <label><input type="radio" name="q50" value="Hiatus hernia"> Hiatus hernia</label>
+                <label><input type="radio" name="q50" value="Pharyngeal pouch"> Pharyngeal pouch</label>
+                <label><input type="radio" name="q50" value="Oesophageal candidiasis"> Oesophageal candidiasis</label>
+                <label><input type="radio" name="q50" value="Benign oesophageal stricture"> Benign oesophageal stricture</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-51">
+            <p>51-  Which of the following is possible complication of administration of gadolinium to patient with CKD?</p>
+            <div class="options">
+                <label><input type="radio" name="q51" value="Nephrogenic systemic sclerosis"> Nephrogenic systemic sclerosis</label>
+                <label><input type="radio" name="q51" value="Acute renal failure"> Acute renal failure</label>
+                <label><input type="radio" name="q51" value="Hypocalcemia"> Hypocalcemia</label>
+                <label><input type="radio" name="q51" value="Hyperthyroidism"> Hyperthyroidism</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-52">
+            <p>52-  Which of the following is a physical sign of portal hypertension?</p>
+            <div class="options">
+                <label><input type="radio" name="q52" value="Gynaecomastia"> Gynaecomastia</label>
+                <label><input type="radio" name="q52" value="Splenomegaly"> Splenomegaly</label>
+                <label><input type="radio" name="q52" value="Palmar erythema"> Palmar erythema</label>
+                <label><input type="radio" name="q52" value="Spider nevi"> Spider nevi</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-53">
+            <p>53-  Detection of ascites is done by the following methods except ...</p>
+            <div class="options">
+                <label><input type="radio" name="q53" value="Knee elbow position"> Knee elbow position</label>
+                <label><input type="radio" name="q53" value="Shifting dullness"> Shifting dullness</label>
+                <label><input type="radio" name="q53" value="Transmitted thrill"> Transmitted thrill</label>
+                <label><input type="radio" name="q53" value="Tidal percussion"> Tidal percussion</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-54">
+            <p>54-  Post hepatitis C infection with liver cirrhosis managed well until recently suddenly increased abdominal girth and LL edema, bilirubin high and albumin 2.8, creatinine 1.3. What is the best next step?</p>
+            <div class="options">
+                <label><input type="radio" name="q54" value="Ultrasound"> Ultrasound</label>
+                <label><input type="radio" name="q54" value="Paracentesis"> Paracentesis</label>
+                <label><input type="radio" name="q54" value="CT abdomen"> CT abdomen</label>
+                <label><input type="radio" name="q54" value="Albumin IV"> Albumin IV</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-55">
+            <p>55-  Which is not true so far as definition of cirrhosis of the liver is concerned?</p>
+            <div class="options">
+                <label><input type="radio" name="q55" value="Fatty infiltration"> Fatty infiltration</label>
+                <label><input type="radio" name="q55" value="Necrosis"> Necrosis</label>
+                <label><input type="radio" name="q55" value="Fibrosis"> Fibrosis</label>
+                <label><input type="radio" name="q55" value="Regeneration"> Regeneration</label>
+                <label><input type="radio" name="q55" value="Diffuse process"> Diffuse process</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-56">
+            <p>56-  A 63-year-old man with a long history of alcohol abuse presents with ascites. He is experiencing mild abdominal discomfort and nausea. Examination reveals tense ascites and generalized tenderness but no rigidity. A diagnostic paracentesis of the fluid is performed. Which of the following ascitic fluid results is most likely to suggest an uncomplicated ascites due to portal hypertension from cirrhosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q56" value="haemorrhage"> haemorrhage</label>
+                <label><input type="radio" name="q56" value="protein >25 g/L"> protein >25 g/L</label>
+                <label><input type="radio" name="q56" value="bilirubin level twice that of serum"> bilirubin level twice that of serum</label>
+                <label><input type="radio" name="q56" value="serum to ascites albumin gradient >1.1 g/dL"> serum to ascites albumin gradient >1.1 g/dL</label>
+                <label><input type="radio" name="q56" value="more than 1000 white cells/mm3"> more than 1000 white cells/mm3</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-57">
+            <p>57-  Serum-ascites albumin gradient (SAAG) is > 1.1 g/dL in all EXCEPT ..</p>
+            <div class="options">
+                <label><input type="radio" name="q57" value="Tuberculous peritonitis"> Tuberculous peritonitis</label>
+                <label><input type="radio" name="q57" value="Congestive cardiac Failure"> Congestive cardiac Failure</label>
+                <label><input type="radio" name="q57" value="Cirrhosis of liver"> Cirrhosis of liver</label>
+                <label><input type="radio" name="q57" value="Hypoalbuminemia"> Hypoalbuminemia</label>
+                <label><input type="radio" name="q57" value="Portal vein thrombosis"> Portal vein thrombosis</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-58">
+            <p>58-  A 54 year old male patient with alcohol-related cirrhosis is admitted with a 3-week history of increasing abdominal swelling and respiratory discomfort. He is mildly jaundiced and has a low-grade pyrexia but is hemodynamically stable. Routine blood tests and a chest X-ray have been requested. What test would you perform next?</p>
+            <div class="options">
+                <label><input type="radio" name="q58" value="Diagnostic paracentesis"> Diagnostic paracentesis</label>
+                <label><input type="radio" name="q58" value="Electroencephalogram"> Electroencephalogram</label>
+                <label><input type="radio" name="q58" value="ERCP"> ERCP</label>
+                <label><input type="radio" name="q58" value="Triple-phase CT liver"> Triple-phase CT liver</label>
+                <label><input type="radio" name="q58" value="Upper Gl endoscopy"> Upper Gl endoscopy</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-59">
+            <p>59-  A 42 years old man with cirrhosis related to hepatitis C and alcohol abuse has ascites requiring frequent large volume paracentesis. All of the following therapies would be indicated for this patient except ...</p>
+            <div class="options">
+                <label><input type="radio" name="q59" value="Fluid restriction to less than 2 litres daily"> Fluid restriction to less than 2 litres daily</label>
+                <label><input type="radio" name="q59" value="Furosemide 40 mg daily"> Furosemide 40 mg daily</label>
+                <label><input type="radio" name="q59" value="Sodium restriction to less than 2 gram daily"> Sodium restriction to less than 2 gram daily</label>
+                <label><input type="radio" name="q59" value="Spironolactone 100 mg daily"> Spironolactone 100 mg daily</label>
+                <label><input type="radio" name="q59" value="Transjugular intrahepatic portosystemic shunt if medical therapy fails"> Transjugular intrahepatic portosystemic shunt if medical therapy fails</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-60">
+            <p>60-  All of the following cause huge splenomegaly except ..</p>
+            <div class="options">
+                <label><input type="radio" name="q60" value="Bilharziasis"> Bilharziasis</label>
+                <label><input type="radio" name="q60" value="Thalassaemia major"> Thalassaemia major</label>
+                <label><input type="radio" name="q60" value="Hepatitis C"> Hepatitis C</label>
+                <label><input type="radio" name="q60" value="Amyloidosis"> Amyloidosis</label>
+                <label><input type="radio" name="q60" value="Chronic myeloid leukaemia"> Chronic myeloid leukaemia</label>
+            </div>
+        </div>
+
+        <button class="btn" id="nextBtn" onclick="nextQuestion()">Next Question</button>
+        <button class="btn" id="submitBtn" onclick="evaluateQuiz()" style="display: none;">Submit Quiz</button>
+
+        <div class="result" id="result">
+            <h2>Results</h2>
+            <div id="score"></div>
+            <div id="answers-summary"></div>
+        </div>
+    </div>
+
+    <script>
+        // إضافة حدث للكيبورد لمنع حفظ الصفحة
+        document.addEventListener("keydown", function (event) {
+            if (event.ctrlKey && event.key === "s") {
+                event.preventDefault();
+                alert("تم منع حفظ الصفحة!");
+            }
+        });
+
+        // إضافة حدث للكيبورد لمنع فتح أدوات المطور
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "F12" || (event.ctrlKey && event.shiftKey && event.key === "I")) {
+                event.preventDefault();
+                alert("تم تعطيل أدوات المطور!");
+            }
+        });
+
+        // إضافة حدث للكيبورد لمنع النقر بزر اليمين
+        document.addEventListener('contextmenu', function(event) {
+            event.preventDefault(); // يمنع فتح قائمة السياق
+            alert("النقر بزر الماوس الأيمن غير مسموح به.");
+        });
+
+        let currentQuestion = 1;
+        const totalQuestions = 60;
+        let score = 0;
+        let timerInterval;
+        const answers = {
+            q1: "Haemochromatosis",
+            q2: "Pernicious anaemia",
+            q3: "Faecal fat estimation",
+            q4: "mucosal biopsy",
+            q5: "Low vitamin B12 and increased mean cell volume",
+            q6: "Small bowel aspiration and culture",
+            q7: "Rifuxamin",
+            q8: "Broad-spectrum antibiotics",
+            q9: "Whipple's disease",
+            q10: "Two weeks of intravenous ceftriaxone, then oral antibiotics for 1 year",
+            q11: "Rotavirus",
+            q12: "Giardiasis",
+            q13: "Tinidazole",
+            q14: "Cause steatorrhoea",
+            q15: "Escherichia coli",
+            q16: "Severe vomiting",
+            q17: "Staph",
+            q18: "Cytomegalovirus colitis",
+            q19: "Laxative abuse",
+            q20: "Anthraquinone laxative abuse",
+            q21: "Thrombophilia",
+            q22: "Previous history of coma",
+            q23: "the high elastin content of scleral tissue",
+            q24: "Gilbert syndrome",
+            q25: "Gilbert's syndrome",
+            q26: "Ulnar border of hand",
+            q27: "Deep percussion",
+            q28: "All of the above",
+            q29: "Erythromycin",
+            q30: "Flucloxacillin",
+            q31: "Co-amoxiclav",
+            q32: "",
+            q33: "Sodium valprorate",
+            q34: "Continue drug",
+            q35: "feeling dysphagia at retrostenal area post oral intake",
+            q36: "A sticking sensation retrosternally in response to oral intake",
+            q37: "Oesophageal candidiasis",
+            q38: "candida infection",
+            q39: "Mechanical ( obstructive ) dysphagia",
+            q40: "Mallory-Weiss syndrome",
+            q41: "Achalasia",
+            q42: "Achalasia",
+            q43: "a motor disorder",
+            q44: "Diarrhoea",
+            q45: "Manometry demonstrates failure of relaxation of the lower esophageal sphincter on swallowing and absent or weak simultaneous contractions in the esophageal body after swallowing",
+            q46: "metaplasia from columnar to squamous",
+            q47: "50 - 100 times risk",
+            q48: "High-dose proton pump inhibitor and follow-up",
+            q49: "24hr oesophageal pH monitoring",
+            q50: "Pharyngeal pouch",
+            q51: "Nephrogenic systemic sclerosis",
+            q52: "Splenomegaly",
+            q53: "Tidal percussion",
+            q54: "Ultrasound",
+            q55: "Fatty infiltration",
+            q56: "serum to ascites albumin gradient >1.1 g/dL",
+            q57: "Tuberculous peritonitis",
+            q58: "Diagnostic paracentesis",
+            q59: "Fluid restriction to less than 2 litres daily",
+            q60: "Hepatitis C"
+        };
+
+        function showQuestion() {
+            document.querySelectorAll('.question').forEach((q, index) => {
+                q .style.display = index + 1 === currentQuestion ? 'block' : 'none';
+            });
+            document.getElementById('nextBtn').style.display = currentQuestion < totalQuestions ? 'block' : 'none';
+            document.getElementById('submitBtn').style.display = currentQuestion === totalQuestions ? 'block' : 'none';
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            clearInterval(timerInterval);
+            startTimer();
+            showQuestion();
+        }
+
+        function startTimer() {
+            let timeRemaining = 60;
+            document.getElementById('timer').textContent = `Time remaining: ${timeRemaining} seconds`;
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                document.getElementById('timer').textContent = `Time remaining: ${timeRemaining} seconds`;
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    if (currentQuestion < totalQuestions) {
+                        nextQuestion();
+                    } else {
+                        evaluateQuiz();
+                    }
+                }
+            }, 1000);
+        }
+
+        function evaluateQuiz() {
+            score = 0;
+            let summary = '';
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                const selectedOption = document.querySelector(`input[name="q${i}"]:checked`);
+                const correctAnswer = answers[`q${i}`];
+                const questionElement = document.getElementById(`question-${i}`);
+                const options = document.querySelectorAll(`input[name="q${i}"]`);
+                let questionSummary = `<p><strong>Question ${i}: </strong>${questionElement.querySelector('p').innerText}</p>`;
+
+                options.forEach(option => {
+                    const optionLabel = option.parentElement;
+                    if (option.value === correctAnswer) {
+                        optionLabel.style.color = 'green';
+                    } else if (selectedOption && selectedOption.value === option.value) {
+                        optionLabel.style.color = 'red';
+                    }
+                });
+
+                questionSummary += `<div>Answer: <strong>${selectedOption ? selectedOption.value : 'None selected'}</strong></div>`;
+                questionSummary += `<div>Correct answer: <strong>${correctAnswer}</strong></div>`;
+
+                if (selectedOption && selectedOption.value === correctAnswer) {
+                    score++;
+                    summary += questionSummary + `<p class="correct">Correct</p>`;
+                } else {
+                    summary += questionSummary + `<p class="incorrect">Incorrect</p>`;
+                }
+            }
+
+            document.getElementById('score').textContent = `Your score: ${score} out of ${totalQuestions}`;
+            document.getElementById('answers-summary').innerHTML = summary;
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('timer').style.display = 'none'; 
+            document.querySelectorAll('.question').forEach((q) => q.style.display = 'none');
+
+            clearInterval(timerInterval);
+        }
+
+        window.onload = function() {
+            showQuestion();
+            startTimer();
+        };
+        
+        
+        function nextQuestion() {
+    // Increase the current question counter
+            currentQuestion++;
+
+            // Reset the timer
+            clearInterval(timerInterval); // Stop the current timer
+            startTimer(); // Start the timer from the beginning
+
+            // Show the next question
+            showQuestion();
+        }
+        
+    </script>
+</body>
+</html>
